@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { useContext } from 'react';
 import { ThemeContext } from '../contexts/ThemeContext';
 import { withLanguageContext } from '../contexts/LanguageContext';
 import AppBar from '@material-ui/core/AppBar';
@@ -33,56 +33,105 @@ const content = {
   }
 };
 
-class NavBar extends Component {
-  static contextType = ThemeContext;
+function NavBar(props) {
 
-  render() {
-    const { classes } = this.props;
-    const { isDarkMode, toggleDarkMode } = this.context;
-    const { language } = this.props.languageContext;
-    const { search, flag } = content[language];
-    // console.log(language);
+  const { isDarkMode, toggleDarkMode } = useContext(ThemeContext)
+  const { classes } = props;
+  const { language } = props.languageContext;
+  const { search, flag } = content[language];
 
-    return (
-      <div className={classes.root}>
-        <AppBar
-          style={{ background: isDarkMode ? '#818b8f' : '#4c535c' }}
-          position="static"
-        >
-          <Toolbar>
-            <IconButton
-              // style={{ backgroundColor: '#4c535c' }}
-              style={{ background: isDarkMode ? '#818b8f' : '#4c535c' }}
-              edge="start"
-              className={classes.menuButton}
-              color="inherit"
-              aria-label="open drawer"
-            >
-              {/* <MenuIcon /> */}
-              <span> {flag} </span>
-            </IconButton>
-            <Typography className={classes.title} variant="h6" noWrap>
-              React Login {language}
-            </Typography>
-            <Switch style={{ color: 'black' }} onClick={toggleDarkMode} />
-            <div className={classes.grow} />
-            <div className={classes.search}>
-              <div className={classes.searchIcon}>
-                <SearchIcon />
-              </div>
-              <InputBase
-                placeholder={`${search}...`}
-                classes={{
-                  root: classes.inputRoot,
-                  input: classes.inputInput
-                }}
-              />
+
+  return (
+    <div className={classes.root}>
+      <AppBar
+        style={{ background: isDarkMode ? '#818b8f' : '#4c535c' }}
+        position="static"
+      >
+        <Toolbar>
+          <IconButton
+            // style={{ backgroundColor: '#4c535c' }}
+            style={{ background: isDarkMode ? '#818b8f' : '#4c535c' }}
+            edge="start"
+            className={classes.menuButton}
+            color="inherit"
+            aria-label="open drawer"
+          >
+            {/* <MenuIcon /> */}
+            <span> {flag} </span>
+          </IconButton>
+          <Typography className={classes.title} variant="h6" noWrap>
+            React Login {language}
+          </Typography>
+          <Switch style={{ color: 'black' }} onClick={toggleDarkMode} />
+          <div className={classes.grow} />
+          <div className={classes.search}>
+            <div className={classes.searchIcon}>
+              <SearchIcon />
             </div>
-          </Toolbar>
-        </AppBar>
-      </div>
-    );
-  }
+            <InputBase
+              placeholder={`${search}...`}
+              classes={{
+                root: classes.inputRoot,
+                input: classes.inputInput
+              }}
+            />
+          </div>
+        </Toolbar>
+      </AppBar>
+    </div>
+  )
 }
+
+// class NavBar extends Component {
+//   static contextType = ThemeContext;
+
+//   render() {
+//     const { classes } = this.props;
+//     const { isDarkMode, toggleDarkMode } = this.context;
+//     const { language } = this.props.languageContext;
+//     const { search, flag } = content[language];
+// console.log(language);
+
+// return (
+//   <div className={classes.root}>
+//     <AppBar
+//       style={{ background: isDarkMode ? '#818b8f' : '#4c535c' }}
+//       position="static"
+//     >
+//       <Toolbar>
+//         <IconButton
+//           // style={{ backgroundColor: '#4c535c' }}
+//           style={{ background: isDarkMode ? '#818b8f' : '#4c535c' }}
+//           edge="start"
+//           className={classes.menuButton}
+//           color="inherit"
+//           aria-label="open drawer"
+//         >
+//           {/* <MenuIcon /> */}
+//           <span> {flag} </span>
+//         </IconButton>
+//         <Typography className={classes.title} variant="h6" noWrap>
+//           React Login {language}
+//         </Typography>
+//         <Switch style={{ color: 'black' }} onClick={toggleDarkMode} />
+//         <div className={classes.grow} />
+//         <div className={classes.search}>
+//           <div className={classes.searchIcon}>
+//             <SearchIcon />
+//           </div>
+//           <InputBase
+//             placeholder={`${search}...`}
+//             classes={{
+//               root: classes.inputRoot,
+//               input: classes.inputInput
+//             }}
+//           />
+//         </div>
+//       </Toolbar>
+//     </AppBar>
+//   </div>
+// );
+// }
+// }
 
 export default withLanguageContext(withStyles(styles)(NavBar));
