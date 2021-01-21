@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import { ThemeContext } from '../contexts/ThemeContext';
-import { withLanguageContext } from '../contexts/LanguageContext';
+import { LanguageContext } from '../contexts/LanguageContext';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import IconButton from '@material-ui/core/IconButton';
@@ -36,10 +36,9 @@ const content = {
 function NavBar(props) {
 
   const { isDarkMode, toggleDarkMode } = useContext(ThemeContext)
+  const { language } = useContext(LanguageContext);
   const { classes } = props;
-  const { language } = props.languageContext;
   const { search, flag } = content[language];
-
 
   return (
     <div className={classes.root}>
@@ -81,6 +80,8 @@ function NavBar(props) {
     </div>
   )
 }
+
+export default withStyles(styles)(NavBar);
 
 // class NavBar extends Component {
 //   static contextType = ThemeContext;
@@ -134,4 +135,4 @@ function NavBar(props) {
 // }
 // }
 
-export default withLanguageContext(withStyles(styles)(NavBar));
+
