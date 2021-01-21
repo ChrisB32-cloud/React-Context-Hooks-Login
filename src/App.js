@@ -23,6 +23,9 @@ import { LanguageProvider } from './contexts/LanguageContext';
 // - Incorrect: useContext(MyContext.Consumer)
 // - Incorrect: useContext(MyContext.Provider)
 
+// - We have to pass in the entire context (useContext(MyContext)) not just
+// useContext(MyContext.Consumer) or just useContext(MyContext.Provider) the whole thing
+
 // - A component calling useContext will always re-render when the context value
 // changes. If re-rendering the component is expensive, you can 
 // optimize it by using memoization
@@ -31,7 +34,7 @@ import { LanguageProvider } from './contexts/LanguageContext';
 // - if You're familiar with the context API before Hooks, useContext(MyContext)
 // is eqivalent to (static contextType = MyContext) in a class, or to <MyContext.Consumer>
 
-// - useContext(MyContext) on;y lets you read the context and subscribe to its changes. You
+// - useContext(MyContext) only lets you read the context and subscribe to its changes. You
 // still need a <MyContext.Provider> above in the tree to provide the value for this context
 
 
