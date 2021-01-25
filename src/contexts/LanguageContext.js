@@ -1,4 +1,5 @@
 import React, { createContext, useState } from 'react';
+import useInputState from '../hooks/useInputState'
 
 // - Context.Consumer
 
@@ -18,16 +19,11 @@ import React, { createContext, useState } from 'react';
 export const LanguageContext = createContext();
 
 export function LanguageProvider(props) {
-
-  const [language, setLanguage] = useState('english')
-
-  function changeLanguage(e) {
-    setLanguage(e.target.value)
-  }
+  const [language, setLanguage] = useInputState('english')
 
   return (
     <LanguageContext.Provider
-      value={{ language, changeLanguage: changeLanguage }}
+      value={{ language, changeLanguage: setLanguage }}
     >
       {props.children}
     </LanguageContext.Provider>
@@ -64,3 +60,8 @@ export function LanguageProvider(props) {
 // );
 
 // export default LanguageContext;
+
+
+// function changeLanguage(e) {
+  //   setLanguage(e.target.value)
+  // }
