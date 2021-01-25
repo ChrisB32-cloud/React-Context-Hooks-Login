@@ -49,17 +49,12 @@ export const ThemeContext = createContext();
 
 export function ThemeProvider(props) {
 
-  // const { isDarkMode, setIsDarkMode } = useToggle(true)
-  const [isDarkMode, setIsDarkMode] = useState(true)
-
-  function toggleDarkMode() {
-    setIsDarkMode(!isDarkMode);
-  }
+  const [isDarkMode, setIsDarkMode] = useToggle(false)
 
 
   return (
     <ThemeContext.Provider
-      value={{ isDarkMode, toggleDarkMode: toggleDarkMode }}
+      value={{ isDarkMode, toggleDarkMode: setIsDarkMode }}
     >
       {props.children}
     </ThemeContext.Provider>
@@ -92,3 +87,10 @@ export function ThemeProvider(props) {
 // }
 
 // export default ThemeProvider;
+
+// const [isDarkMode, setIsDarkMode] = useState(true)
+
+  // function toggleDarkMode() {
+  //   setIsDarkMode(!isDarkMode);
+  // }
+
